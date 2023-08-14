@@ -1,9 +1,15 @@
-# React + Vite
+# Journaling Project
+This project is a journaling app that helps users learn English. The app generates a question, and the user answers that question in one paragraph (in English). The app then creates a corrected version of the text and provides feedback about the changes. The app uses AI, Adsense, Analytics, and is SEO friendly. It is also deployed to the web.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Key Features
+[] Generate questions in English
+[] Use AI to provide corrected versions of text with feedback
+[] Integrate with Adsense to generate revenue
+[] Collect analytics data to improve the app
+[] Make the app SEO friendly to attract more users
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# journaling
+# Main Tools Used
+[] React & Vite
+[] Material UI
+[] React Router Dom
+[] OpenAI API
