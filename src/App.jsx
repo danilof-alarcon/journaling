@@ -1,10 +1,22 @@
 import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import Home from './pages/HomePage';
 
 function App() {
+
+  const theme = createTheme({
+    //Custom Code Here
+  });
+
   return (
-    <>
-      <div>Duck Journaling</div>
-    </>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path='*' element={<Home />}/>
+        </Routes>
+      </Router>
+    </ThemeProvider>
   )
 }
 
