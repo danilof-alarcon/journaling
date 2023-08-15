@@ -6,14 +6,18 @@ import Home from './pages/HomePage';
 function App() {
 
   const theme = createTheme({
-    //Custom Code Here
+    palette: {
+      primary: {
+        main: '#000000',
+      },
+    },
   });
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path='*' element={<Home />}/>
+          <Route path='/' element={<Home />}/>
         </Routes>
       </Router>
     </ThemeProvider>
