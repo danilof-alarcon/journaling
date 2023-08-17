@@ -1,7 +1,33 @@
 import { Box, Container, Fab, Grid, Paper, Stack, Typography } from "@mui/material"
 import arrows from "../assets/arrows-rotate.svg"
+import { useState } from "react"
+import { openai } from "../api/openai"
 
 function Home() {
+
+    const [question, setQuestion] = useState("What am I grateful for today?")
+    const [rotationAngle, setRotationAngle] = useState(0);
+
+    const imageStyle = {
+        transform: `rotate(${rotationAngle}deg)`,
+        transition: "1s"
+    };
+
+    async function generateQuestion() {
+
+        setRotationAngle(rotationAngle + 365);
+        setQuestion("Wait...")
+
+        const completion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: 'Create a thought-provoking journaling question. Do not include "" in the response.' }],
+            model: 'gpt-3.5-turbo',
+            max_tokens: 64,
+        });
+    
+        setQuestion(completion.choices[0].message.content);
+ 
+    }
+
     return (
         <Box sx={{ backgroundColor: "#FFFD63" }} >
             <Container fixed >
@@ -48,14 +74,15 @@ function Home() {
                                 fontFamily={'Poppins'} 
                                 fontWeight={500}
                                 paddingRight={2} >
-                                    What am I grateful for today, bitch?
+                                    {question}
                                 </Typography>
                                 <Fab 
                                 size="small" 
                                 color="primary" 
                                 aria-label="New Question" 
-                                sx={{ minWidth: "40px" }} >
-                                    <img src={arrows} alt="arrows-rotate" />
+                                sx={{ minWidth: "40px" }}
+                                onClick={generateQuestion} >
+                                    <img src={arrows} alt="arrows-rotate" style={imageStyle} />
                                 </Fab>
                             </Box>
                         </Paper>
