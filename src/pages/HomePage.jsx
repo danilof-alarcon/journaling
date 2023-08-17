@@ -1,31 +1,24 @@
 import { Box, Container, Fab, Grid, Paper, Stack, Typography } from "@mui/material"
 import arrows from "../assets/arrows-rotate.svg"
 import { useState } from "react"
-import { openai } from "../api/openai"
+import journalingQuestions from "../api/journalingData"
 
 function Home() {
 
-    const [question, setQuestion] = useState("What am I grateful for today?")
+    const [question, setQuestion] = useState("What are you grateful for today?")
     const [rotationAngle, setRotationAngle] = useState(0);
 
     const imageStyle = {
         transform: `rotate(${rotationAngle}deg)`,
-        transition: "1s"
+        transition: "0.5s"
     };
 
     async function generateQuestion() {
-
         setRotationAngle(rotationAngle + 365);
-        setQuestion("Wait...")
+        const randomIndex = Math.floor(Math.random() * journalingQuestions.length);
+        const randomQuestion = journalingQuestions[randomIndex];
+        setQuestion(randomQuestion);
 
-        const completion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: 'Create a thought-provoking journaling question. Do not include "" in the response.' }],
-            model: 'gpt-3.5-turbo',
-            max_tokens: 64,
-        });
-    
-        setQuestion(completion.choices[0].message.content);
- 
     }
 
     return (
