@@ -64,6 +64,7 @@ function Home() {
                                     md: 18, 
                                     xs: 16
                                 }} 
+                                lineHeight={1.5}
                                 fontFamily={'Poppins'} 
                                 fontWeight={500}
                                 paddingRight={2} >
