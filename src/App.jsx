@@ -1,19 +1,17 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
 import Home from './pages/HomePage';
+import theme from './utils/theme';
+
 
 function App() {
-
-  const theme = createTheme({
-    //Custom Code Here
-  });
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path='*' element={<Home />}/>
+          <Route path='/' element={<Home />}/>
         </Routes>
       </Router>
     </ThemeProvider>
