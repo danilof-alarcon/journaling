@@ -1,5 +1,4 @@
 const journalingQuestions = [
-    "What are three things I'm grateful for today, and why do they hold significance in my life?",
     "What challenges or obstacles did I face today, and how did I navigate through them? What did I learn from these experiences?",
     "What are my short-term and long-term goals, and what steps can I take tomorrow to move closer to achieving them?",
     "How did I take care of my physical, emotional, and mental well-being today? Is there something I can improve or prioritize tomorrow?",
