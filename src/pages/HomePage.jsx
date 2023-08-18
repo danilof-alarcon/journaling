@@ -107,7 +107,7 @@ function Home() {
                                     <Paper sx={{ width: { md: 800, xs: "auto" } }}>
                                         <Box padding={4} alignItems="center" justifyContent="space-between" sx={{ display: "flex" }} >
                                             <FormControl fullWidth>
-                                                <Field as={TextField} multiline rows={5} variant="standard" type="text" name="content" inputProps={{ minLength: 100, maxLength: 400 }} id="content-input" required />
+                                                <Field as={TextField} multiline rows={5} variant="standard" type="text" name="content" inputProps={{ minLength: 100, maxLength: 400 }} id="content-input" placeholder="Write here..." required />
                                             </FormControl>                                        
                                         </Box>
                                     </Paper>
