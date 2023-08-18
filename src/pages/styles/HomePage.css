@@ -1,10 +1,4 @@
-.content-input {
-    border: none;
-    font-size: 16px;
-    font-family: Poppins, sans-serif;
+#content-input {
     font-weight: 400;
     color: #8C8C8C;
-    min-height: 100px;
-    min-width: 100%;
-    line-height: 24px;
 }
