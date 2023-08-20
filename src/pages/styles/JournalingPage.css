@@ -1,0 +1,10 @@
+#form-input {
+    font-size: 16px;
+    color: #8C8C8C;
+}
+
+@media (max-width: 900px) {
+    #form-input {
+        font-size: 14px;
+    } 
+}
