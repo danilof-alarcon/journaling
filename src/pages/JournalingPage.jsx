@@ -16,6 +16,10 @@ function Journaling() {
     const [question, setQuestion] = useState(journalingQuestions[randomIndex])
     const [rotationAngle, setRotationAngle] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState({
+        value: false,
+        message: ""
+    })
     const [reviewData, setReviewData] = useState({
         value: false,
         input: "",
@@ -38,37 +42,52 @@ function Journaling() {
 
         const { input } = values;
 
-        const completion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: `
-            You will receive a JSON containing a journaling question and its corresponding answer. The answer might contain errors or non-standard English. The JSON structure will be as follows:
-            {
-                question: '${question}',
-                answer: '${input}'
+        if (input.length >= 25) {
+            try {
+                const completion = await openai.chat.completions.create({
+                    messages: [{ role: 'user', content: `
+                    You will receive a JSON containing a journaling question and its corresponding answer. The answer might contain errors or non-standard English. The JSON structure will be as follows:
+                    {
+                        question: '${question}',
+                        answer: '${input}'
+                    }
+                    Your task is to rephrase the answer using proper standard English and provide clear explanations for the modifications you make. Your response should follow this structure:
+                    {
+                        "corrected_text": "CORRECTED_VERSION",
+                        "feedback": [
+                            "Explanation of change...",
+                            "Explanation of change...",
+                            "Explanation of change...",
+                            ...
+                        ]
+                    }
+                    ` }],
+                    model: 'gpt-3.5-turbo',
+                    max_tokens: 500,
+                    temperature: 0.8
+                });
+        
+                const response = JSON.parse(completion.choices[0].message.content)
+        
+                setReviewData({
+                    value: true,
+                    input: input,
+                    correctedText: response.corrected_text,
+                    feedback: response.feedback
+                })
+            } catch (error) {
+                setError({
+                    value: true,
+                    message: "We are currently experiencing difficulties. Please try again later."
+                })
             }
-            Your task is to rephrase the answer using proper standard English and provide clear explanations for the modifications you make. Your response should follow this structure:
-            {
-                "corrected_text": "CORRECTED_VERSION",
-                "feedback": [
-                    "Explanation of change...",
-                    "Explanation of change...",
-                    "Explanation of change...",
-                    ...
-                ]
-            }
-            ` }],
-            model: 'gpt-3.5-turbo',
-            max_tokens: 500,
-            temperature: 0.8
-        });
-
-        const response = JSON.parse(completion.choices[0].message.content)
-
-        setReviewData({
-            value: true,
-            input: input,
-            correctedText: response.corrected_text,
-            feedback: response.feedback
-        })
+        } else {
+            setError({
+                value: true,
+                message: "Provide a text with a minimum of 25 characters."
+            })
+            setIsSubmitting(false)
+        }
     }
 
     const initialValues = {
@@ -109,7 +128,7 @@ function Journaling() {
                                 <Paper sx={styles.components.paper}>
                                     <Box sx={styles.components.box}>
                                         <FormControl fullWidth>
-                                            <Field as={TextField} multiline maxRows={5} variant="standard" type="text" name="input" inputProps={{ minLength: 100, maxLength: 400 }} id="form-input" placeholder="Write here..." required />
+                                            <Field as={TextField} multiline maxRows={5} variant="standard" type="text" name="input" inputProps={{ maxLength: 400 }} id="form-input" placeholder="Write here..." error={error.value} helperText={error.value ? error.message : ""} required />
                                         </FormControl>      
                                     </Box>
                                 </Paper>
