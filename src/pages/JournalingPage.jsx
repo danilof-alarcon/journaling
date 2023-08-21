@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Fab, FormControl, Grid, List, ListItem, ListItemIcon, Paper, Stack, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, Divider, Fab, FormControl, Grid, List, ListItem, ListItemIcon, Paper, Stack, TextField, Typography } from "@mui/material"
 import styles from "./styles/custom-styles"
 import arrows from "../assets/arrows-rotate.svg"
 import { useState } from "react";
@@ -100,7 +100,11 @@ function Journaling() {
                 <Grid container direction="column" justifyContent="center" alignItems="center" paddingY={5} minHeight="100vh">
                     <Stack spacing={2}>
                         <Typography variant="h1" fontSize={{md: 50, xs: 40}} fontFamily={"Pacifico"} textAlign="center" paddingBottom={2}>Duck’s Journaling</Typography>
-                        <Typography variant="body2" maxWidth={{md: 800, xs: "auto"}} fontSize={{ md: 16, xs: 14 }} textAlign={"center"} color={"#A8A628"} paddingBottom={4} >Improve English with interactive journaling. Write in English, get corrections and feedback.</Typography>
+                        <Typography variant="body2" maxWidth={{md: 800, xs: "auto"}} fontSize={{ md: 16, xs: 14 }} textAlign={"center"} color={"#A8A628"} paddingBottom={4} >
+                            ✍️ Learn English while journaling.
+                            <br/>
+                            Write in English, get corrections and feedback.
+                        </Typography>
 
                         <Paper sx={styles.components.paper}>
                                 <Box sx={styles.components.box}>
@@ -150,6 +154,7 @@ function Journaling() {
 
                         {reviewData.value ?
                         
+                        <>
                         <Paper sx={styles.components.paper}>
                                 <Box sx={styles.components.box}>
                                     <Stack spacing={2}>
@@ -162,8 +167,8 @@ function Journaling() {
                                         <Typography variant="h3" sx={styles.typography.h3} paddingRight={2}>Feedback:</Typography>
                                         <List>
                                             {reviewData.feedback.map((item, index) => (
-                                                <ListItem sx={{ fontFamily: "Poppins", fontSize: { md: 16, xs: 14 }, fontWeight: 400, color: "#8C8C8C" }} key={index}>
-                                                    <ListItemIcon sx={{ fontSize: 20, minWidth: 0, paddingRight: 1 }}>👉</ListItemIcon>
+                                                <ListItem alignItems="flex-start" sx={{ fontFamily: "Poppins", fontSize: { md: 16, xs: 14 }, fontWeight: 400, color: "#8C8C8C" }} key={index}>
+                                                    <ListItemIcon sx={{ fontSize: 20 }}>👉</ListItemIcon>
                                                     {item}
                                                 </ListItem>
                                             ))}
@@ -171,6 +176,9 @@ function Journaling() {
                                     </Stack>
                                 </Box>
                         </Paper>
+
+                        <Button variant="text" onClick={() => window.location.reload()}>New Question</Button>
+                        </>
 
                         : "" }
 
