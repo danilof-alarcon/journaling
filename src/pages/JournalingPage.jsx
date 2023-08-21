@@ -101,7 +101,7 @@ function Journaling() {
                     <Stack spacing={2}>
                         <Typography variant="h1" fontSize={{md: 50, xs: 40}} fontFamily={"Pacifico"} textAlign="center" paddingBottom={2}>Duck’s Journaling</Typography>
                         <Typography variant="body2" maxWidth={{md: 800, xs: "auto"}} fontSize={{ md: 16, xs: 14 }} textAlign={"center"} color={"#A8A628"} paddingBottom={4} >
-                            ✍️ Learn English while journaling.
+                            ✍️ Learn English while Journaling.
                             <br/>
                             Write in English, get corrections and feedback.
                         </Typography>
@@ -177,7 +177,7 @@ function Journaling() {
                                 </Box>
                         </Paper>
 
-                        <Button variant="text" onClick={() => window.location.reload()}>New Question</Button>
+                        <Button variant="text" onClick={() => window.location.reload()}>Answer Another Question</Button>
                         </>
 
                         : "" }
